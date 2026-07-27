@@ -21,6 +21,16 @@
       <nav>
         <img src="logo.png" alt="" />
         <div class="left">Revan's Protfolio</div>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <div class="right">
           <ul>
             <li><a href="#home">Home</a></li>
@@ -143,6 +153,23 @@
         event.preventDefault();
         alert("Thank you for your message! I will get back to you soon.");
         event.target.reset();
+      }
+
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navRight = document.querySelector("nav .right");
+
+      if (menuToggle && navRight) {
+        menuToggle.addEventListener("click", () => {
+          const isOpen = navRight.classList.toggle("show");
+          menuToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        document.querySelectorAll("nav .right a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navRight.classList.remove("show");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
       }
     </script>
   </body>
